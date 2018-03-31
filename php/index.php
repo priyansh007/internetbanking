@@ -2,6 +2,8 @@
 $usid="";
 $name="";
 $bal="";
+$ho="";
+$yo="";
 $usid=$_COOKIE["user"];
 if(!isset($_COOKIE['user'])){
 	header("location:login.php");
@@ -21,19 +23,46 @@ if(isset($_COOKIE['bal'])){
 	setcookie("bal",'',time()-1*60*60);
 
 }
+if(isset($_COOKIE['cal'])){
+	$ho=$_REQUEST['ek'];
+	$yo=$_REQUEST['be'];
+	echo "<script type='text/javascript'>alert('Transfer $ho rupees to $yo done successfully');</script>";
+	setcookie("cal",'',time()-1*60*60);
 
+}
+if(isset($_COOKIE['del'])){
+	echo "<script type='text/javascript'>alert('Sorry User not found');</script>";
+	setcookie("del",'',time()-1*60*60);
+
+}
+if(isset($_COOKIE['el'])){
+	echo "<script type='text/javascript'>alert('Please Put some Amount');</script>";
+	setcookie("el",'',time()-1*60*60);
+
+}
+if(isset($_GET['logout'])){
+	setcookie("user",'',time()-1*60*60);
+	header("location:login.php");
+
+}
 if(isset($_GET['but1'])){
 	$val=$_GET['num'];
+	if($val==0){
+		setcookie("el",$val,time()+1*60*60);
+		header("location:index.php");
+	}
+	else{
 	$data = mysqli_connect("localhost","root","","bank") or die();
 	$db=mysqli_query($data,"SELECT `balance` FROM login WHERE `userid`='$usid'");
 	$db=mysqli_fetch_assoc($db);
 	$ba=$db['balance'];
 	$ba=$ba+$val;
+
 	mysqli_query($data,"UPDATE login SET `balance`='$ba' WHERE `userid`='$usid'");
 	
 	setcookie("bal",$bal,time()+1*60*60);
 	header("location:index.php");
- 
+ }
 
 }
 if(isset($_GET['but2'])){
@@ -45,6 +74,10 @@ if(isset($_GET['but2'])){
 	$df=mysqli_query($data,"SELECT `balance` FROM login WHERE `userid`='$usid'");
 	$df=mysqli_fetch_assoc($df);
 	$ba=$df['balance'];
+	if($val==0){
+		setcookie("el",$ba,time()+1*60*60);
+		header("location:index.php");
+	}else{
 	foreach ($db as $dc) {
 		$yo=$dc["userid"];
 		$ho=$dc["balance"];
@@ -54,11 +87,20 @@ if(isset($_GET['but2'])){
 			$ba=$ba-$val;
 			mysqli_query($data,"UPDATE login SET `balance`='$ba' WHERE `userid`='$usid'");
 			mysqli_query($data,"UPDATE login SET `balance`='$ho' WHERE `userid`='$yo'");
+			setcookie("cal",$yo,time()+1*60*60);
+			$flag=1;
+			header("location:index.php?ek=$val&&be=$yo");
 
 		}
+		
+
+	}
+	if($flag==0){
+		setcookie("del",$yo,time()+1*60*60);
+		header("location:index.php");	
 	}
 	
- 
+ }
 
 }
 ?>
@@ -98,6 +140,9 @@ $(document).ready(function(){
 			To : <input type="text" name="usr" value="userid"><br><br>
 			Amount : <input type="number" name="num2" value="0">
 			<input type="submit" name="but2" value="PAY">
+		</form><br><br>
+		<form method="GET" action="index.php" id="logou">
+			<input type="submit" name="logout" value="Log Out">
 		</form>
 	</div>
 
