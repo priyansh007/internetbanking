@@ -59,7 +59,7 @@ if(isset($_GET['but1'])){
 	$ba=$ba+$val;
 
 	mysqli_query($data,"UPDATE login SET `balance`='$ba' WHERE `userid`='$usid'");
-	
+	mysqli_query($data,"INSERT INTO trans VALUES('','$usid','Added $val rupees to wallet successfully')");
 	setcookie("bal",$bal,time()+1*60*60);
 	header("location:index.php");
  }
@@ -73,6 +73,7 @@ if(isset($_GET['but2'])){
 	$db=mysqli_query($data,"SELECT `userid`,`balance` FROM login");
 	$df=mysqli_query($data,"SELECT `balance` FROM login WHERE `userid`='$usid'");
 	$df=mysqli_fetch_assoc($df);
+
 	$ba=$df['balance'];
 	if($val==0){
 		setcookie("el",$ba,time()+1*60*60);
@@ -87,6 +88,8 @@ if(isset($_GET['but2'])){
 			$ba=$ba-$val;
 			mysqli_query($data,"UPDATE login SET `balance`='$ba' WHERE `userid`='$usid'");
 			mysqli_query($data,"UPDATE login SET `balance`='$ho' WHERE `userid`='$yo'");
+			mysqli_query($data,"INSERT INTO trans VALUES('','$usid','Transfered $val rupees to $yo')");
+			mysqli_query($data,"INSERT INTO trans VALUES('','$yo','Recieved $val rupees from $usid')");
 			setcookie("cal",$yo,time()+1*60*60);
 			$flag=1;
 			header("location:index.php?ek=$val&&be=$yo");
@@ -119,6 +122,15 @@ $(document).ready(function(){
         $("#pay").hide();
         $("#pay1").show();
         });
+	$("#tra1").click(function(){
+        $("#tra1").hide(1000);
+        $("#tra2").show(1000);
+        });
+	$("#ro").click(function(){
+        $("#tra2").hide(1000);
+        $("#tra1").show(1000);
+        });
+	
 
 });
 </script>
@@ -141,6 +153,19 @@ $(document).ready(function(){
 			Amount : <input type="number" name="num2" value="0">
 			<input type="submit" name="but2" value="PAY">
 		</form><br><br>
+		<button id="tra1">Transaction</button>
+		<div id="tra2" style="display: none;">
+			<?php
+			$data = mysqli_connect("localhost","root","","bank") or die();
+			$db=mysqli_query($data,"SELECT `des` FROM trans WHERE `userid1`='$usid'");
+			foreach ($db as $dc) {
+				$nm=$dc['des'];
+				echo $nm."<br>";
+				
+			}
+			?>
+			<button id="ro">/\</button>
+			</div><br><br>
 		<form method="GET" action="index.php" id="logou">
 			<input type="submit" name="logout" value="Log Out">
 		</form>
