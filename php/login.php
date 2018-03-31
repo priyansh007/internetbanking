@@ -39,7 +39,7 @@
 	<head>
 		<title>login</title>
 		<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../css/bank.css?version=51">
+		<link rel="stylesheet" type="text/css" href="../css/bank.css?version=1051">
 		<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="../js/jquery-3.1.1.min.js"></script>
@@ -101,5 +101,6 @@
 		{
 			$message = "Successfully Signed up";
 			echo "<script type='text/javascript'>alert('$message');</script>";
+			setcookie('signup', '', time() - 3600);
 		}
 		?>
