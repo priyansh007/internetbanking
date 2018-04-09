@@ -1,8 +1,10 @@
 	<?php
 	$result="";
+	session_start();
 	if(isset($_GET["loginbtn"]))
 	{
 		$ids=$_GET["userid"];
+		$no=$_GET["userno"];
 	    $psswd=$_GET["psswd"];
 
 		$flag=0;
@@ -20,7 +22,7 @@
 			$db=mysqli_fetch_assoc($db);
 			if($db["password"]==$psswd)
 			{
-				setcookie("user",$ids,time()+1*60*60);
+				$_SESSION['userno']=$no;
 				header("location:index.php");
 			}
 			else{
