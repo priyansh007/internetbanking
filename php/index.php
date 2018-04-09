@@ -106,6 +106,10 @@ if(isset($_GET['but2'])){
  }
 
 }
+
+if(isset($_GET['fdbut'])){
+header("location:fd.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -166,9 +170,14 @@ $(document).ready(function(){
 			?>
 			<button id="ro">/\</button>
 			</div><br><br>
+			<form method="GET" action="index.php" id="fd">
+				<input type="submit" name="fdbut" value="FD">
+			</form>
+			<br>
 		<form method="GET" action="index.php" id="logou">
 			<input type="submit" name="logout" value="Log Out">
 		</form>
+
 	</div>
 
 </body>
