@@ -3,9 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2018 at 12:42 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+
+-- Generation Time: Apr 15, 2018 at 08:35 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -70,7 +72,9 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`uid`, `userid`, `password`, `fname`, `lname`, `emailid`, `balance`) VALUES
 (2, 'priyansh007', '1234', 'Priyansh', 'Zalavadiya', 'priyanshzalavadiya007@gmail.com', 770),
-(3, 'vinu', '123456', 'vinas', 'Zalavadiya', 'vinuj@gmail.com', 21000),
+
+(3, 'vinu', '123456', 'vinas', 'Zalavadiya', 'vinuj@gmail.com', 400),
+
 (4, 'jaydudhat83', 'rj1234', 'jay', 'Dudhat', 'jd@gmail.com', 0);
 
 -- --------------------------------------------------------
@@ -143,11 +147,12 @@ ALTER TABLE `transcation`
 --
 
 --
+
 -- AUTO_INCREMENT for table `fd`
 --
 ALTER TABLE `fd`
   MODIFY `fid` int(121) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
---
+
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`

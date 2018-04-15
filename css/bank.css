@@ -970,3 +970,14 @@ ul#menu li a:hover
 
 
 }
+
+.reqmoney{
+	display: none;
+}
+.sendmoney{
+	display: none;
+}
+.shownot{
+	display: none;
+
+}
