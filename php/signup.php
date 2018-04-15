@@ -25,7 +25,7 @@ if(isset($_GET["signupbtn"]))
 		$result="User id Is Already Registered!!";
 	}
 	if($flag==0){
-		mysqli_query($data,"INSERT INTO login VALUES('$uid','$passwd','$finame','$liname','$mail','')");
+		mysqli_query($data,"INSERT INTO login VALUES('','$uid','$passwd','$finame','$liname','$mail','0')");
 		setcookie('signup','1',time()+60);
 		header("location:login.php");
 	}
