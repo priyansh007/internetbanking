@@ -1,3 +1,17 @@
+<?php
+	session_start();
+	if (!isset($_SESSION["uid"]))
+	{
+		header("location:../auth/login/");
+	}
+	$usid=$_SESSION["uid"];
+	$data=mysqli_connect("localhost","root","","bank") or die();
+	$db=mysqli_query($data,"SELECT `fname`,`lname` FROM login WHERE `uid`='$usid'");
+	$db=mysqli_fetch_assoc($db);
+	$fn=$db['fname'];
+	$ln=$db['lname'];
+	$name=ucfirst($fn)." ".ucfirst($ln);
+?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -46,7 +60,7 @@
 					<i class="material-icons" style="font-size:60px;color:white;" role="presentation">account_box</i><br>
 					<div class="demo-avatar-dropdown">
 						<span>
-							<i class='material-icons' style='font-size:16px;'>verified_user</i>&nbsp;Name here
+							<i class='material-icons' style='font-size:16px;'>verified_user</i>&nbsp;<?php echo $name;?>
 						</span>
 						<div class="mdl-layout-spacer"></div>
 						<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
@@ -55,8 +69,7 @@
 						</button>
 						<ul type="submit" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
 							<a style='text-decoration: none;' href='../your-info/'><li type='submit' class='mdl-menu__item'><i class='material-icons'>info_outline</i>&ensp;Account</li></a>
-							<a style='text-decoration: none;' href='../login/logout.php'><li type='submit' class='mdl-menu__item'><i class='material-icons'>delete</i>&ensp;Logout</li></a>
-							<a style='text-decoration: none;' href='../login/'><li type='submit' class='mdl-menu__item'><i class='material-icons'>move_to_inbox</i>&ensp;Login</li></a>
+							<a style='text-decoration: none;' href='../auth/logout.php'><li type='submit' class='mdl-menu__item'><i class='material-icons'>delete</i>&ensp;Logout</li></a>							
 						</ul>
 					</div>
 				</header>
@@ -79,11 +92,11 @@
 						<div class = "mdl-card__title mdl-color--teal-300">
 							<h2 class = "mdl-card__title-text">Balance</h2>
 						</div>
-						<div class = "mdl-card__supporting-text">
+						<div class = "mdl-card__supporting-text" id='showbalance' style="font-size:18px">
 							Check your balance here
 						</div>
 						<div class="mdl-card__actions mdl-card--border">
-							<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Check</a>
+							<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="getbalance()">Check</button>
 						</div>
 					</div>
 					<div class="square-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-desktop" style="min-height:0px;" onmouseover="$(this).addClass('mdl-shadow--8dp');" onmouseout="$(this).removeClass('mdl-shadow--8dp');">
@@ -112,6 +125,21 @@
 			</main>
 		</div>
 		<script src="../js/material.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+		<script type="text/javascript">
+			function getbalance()
+			{ 
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+
+					if (this.readyState == 4 && this.status == 200) {
+
+						document.getElementById("showbalance").innerHTML = this.responseText;	
+					}
+				};
+				xhttp.open("GET", "showbalance.php", true);
+				xhttp.send();
+			}
+		</script>
 	</body>
 </html>
