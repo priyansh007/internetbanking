@@ -1,4 +1,5 @@
- <?php
+ <?php  
+			
 session_start();
 if(isset($_SESSION["user"])){
 	$usid=$_SESSION["user"];
@@ -8,6 +9,9 @@ if(isset($_SESSION["user"])){
 	$fn=$db['fname'];
 	$ln=$db['lname'];
 	$name=ucfirst($fn)." ".ucfirst($ln);	 
+}
+if(isset($_GET['fdbut'])){
+header("location:fd.php");
 }
 ?>
  <!DOCTYPE html>
@@ -58,6 +62,10 @@ if(isset($_SESSION["user"])){
 	  		 
 
 	  	</div>
+      <br><br>
+			<form method="GET" action="index.php" id="fd">
+				<input type="submit" name="fdbut" value="FD">
+			</form>
 	  </div>
 
 
@@ -178,3 +186,4 @@ function shownot()
 
 		});
  </script>
+

@@ -3,9 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+
 -- Generation Time: Apr 15, 2018 at 08:35 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +23,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `bank`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fd`
+--
+
+CREATE TABLE `fd` (
+  `fid` int(121) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `opendate` date NOT NULL,
+  `closedate` date NOT NULL,
+  `interest` double NOT NULL,
+  `startmoney` double NOT NULL,
+  `endmoney` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fd`
+--
+
+INSERT INTO `fd` (`fid`, `uid`, `opendate`, `closedate`, `interest`, `startmoney`, `endmoney`) VALUES
+(1, 0, '2018-04-03', '2018-04-04', 0, 0, 0),
+(13, 3, '2018-04-15', '2018-05-30', 5, 3000, 3018.4931506849),
+(19, 3, '2018-04-15', '2020-04-14', 5.75, 6000, 6690),
+(22, 3, '2018-04-15', '2018-05-30', 5, 2500, 2515.4109589041);
 
 -- --------------------------------------------------------
 
@@ -44,7 +72,9 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`uid`, `userid`, `password`, `fname`, `lname`, `emailid`, `balance`) VALUES
 (2, 'priyansh007', '1234', 'Priyansh', 'Zalavadiya', 'priyanshzalavadiya007@gmail.com', 770),
+
 (3, 'vinu', '123456', 'vinas', 'Zalavadiya', 'vinuj@gmail.com', 400),
+
 (4, 'jaydudhat83', 'rj1234', 'jay', 'Dudhat', 'jd@gmail.com', 0);
 
 -- --------------------------------------------------------
@@ -88,6 +118,12 @@ CREATE TABLE `transcation` (
 --
 
 --
+-- Indexes for table `fd`
+--
+ALTER TABLE `fd`
+  ADD PRIMARY KEY (`fid`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -111,6 +147,12 @@ ALTER TABLE `transcation`
 --
 
 --
+
+-- AUTO_INCREMENT for table `fd`
+--
+ALTER TABLE `fd`
+  MODIFY `fid` int(121) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
