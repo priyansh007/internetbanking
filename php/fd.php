@@ -50,7 +50,8 @@ if(isset($_GET['avail'])){
 		$data=mysqli_connect("localhost","root","","bank") or die();
 		$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','$to')");
 		$bal=$bal-$yo;
-		$db=mysqli_query($data,"UPDATE login SET `balance`='$bal' WHERE `uid`='usid'");
+		$db=mysqli_query($data,"UPDATE login SET `balance`='$bal' WHERE `uid`='$usid'");
+		header("location:myfd.php");
 	}
 	
 }
