@@ -20,7 +20,7 @@ $id2=$db['userid'];
 
  
 
-mysqli_query($dt,"INSERT INTO transaction VALUES(' ','$receiv','$id1','$mon','0')");
+mysqli_query($dt,"INSERT INTO transcation VALUES(' ','$receiv','$id1','$mon','0')");
 
 
 			mysqli_query($dt,"INSERT INTO trans VALUES('','$id2','Requested $mon rupees to $id')");

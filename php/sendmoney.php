@@ -17,7 +17,7 @@ $bal=$db['balance'];
 $id2=$db['userid'];
  
 
-mysqli_query($dt,"INSERT INTO transaction VALUES(' ','$receiv','$id1','$mon','1')");
+mysqli_query($dt,"INSERT INTO transcation VALUES(' ','$receiv','$id1','$mon','1')");
 
 
 mysqli_query($dt,"UPDATE `login` SET `balance` = `balance`-'$mon' WHERE `uid`='$receiv'");
