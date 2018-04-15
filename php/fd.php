@@ -19,9 +19,11 @@ if(isset($_GET['avail'])){
 	$da=date("Y/m/d");
 	if($po==45){
 	$da1=date("Y/m/d",time() + ((45) * 24*60*60));
+	$to=$yo+($yo*$ro*45/(100*365));
 	}
 	else{
 		$da1=date("Y/m/d",time() + ((365)*$po* 24*60*60));
+		$to=$yo+($yo*$ro*$po/(100));
 	}
 
 	if($yo>$bal){
@@ -46,7 +48,9 @@ if(isset($_GET['avail'])){
 	}
 	else{
 		$data=mysqli_connect("localhost","root","","bank") or die();
-		$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','')");
+		$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','$to')");
+		$bal=$bal-$yo;
+		$db=mysqli_query($data,"UPDATE login SET `balance`='$bal' WHERE `uid`='usid'");
 	}
 	
 }
