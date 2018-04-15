@@ -21,7 +21,7 @@ mysqli_query($dt,"INSERT INTO transcation VALUES(' ','$receiv','$id1','$mon','1'
 
 
 mysqli_query($dt,"UPDATE `login` SET `balance` = `balance`-'$mon' WHERE `uid`='$receiv'");
-mysqli_query($dt,"UPDATE `login` SET `balance` = `balance`+'$mon' WHERE `uid`='$id'");
+mysqli_query($dt,"UPDATE `login` SET `balance` = `balance`+'$mon' WHERE `userid`='$id'");
 
 mysqli_query($dt,"INSERT INTO trans VALUES('','$id2','Sent $mon rupees to $id')");
 mysqli_query($dt,"INSERT INTO trans VALUES('','$id','Recieved $mon rupees from $id2')");
