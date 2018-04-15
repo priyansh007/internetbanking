@@ -1,6 +1,5 @@
 	<?php
 	$result="";
-	session_start();
 	if(isset($_GET["loginbtn"]))
 	{
 		$ids=$_GET["userid"];
@@ -17,13 +16,11 @@
 			}
 		}
 		if($flag==1){
-			$db=mysqli_query($data,"SELECT `password`,`uid` FROM login WHERE `userid`='$ids'");
+			$db=mysqli_query($data,"SELECT `password` FROM login WHERE `userid`='$ids'");
 			$db=mysqli_fetch_assoc($db);
 			if($db["password"]==$psswd)
 			{
-			 
-				$_SESSION["user"] = $db["uid"];
-
+				setcookie("user",$ids,time()+1*60*60);
 				header("location:index.php");
 			}
 			else{
