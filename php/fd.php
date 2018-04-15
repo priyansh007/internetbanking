@@ -1,5 +1,6 @@
 <?php
 session_start();
+$ro="5";
 if(isset($_SESSION["user"])){
 	$usid=$_SESSION["user"];
 	$data=mysqli_connect("localhost","root","","bank") or die();
@@ -10,7 +11,45 @@ if(isset($_SESSION["user"])){
 	$name=ucfirst($fn)." ".ucfirst($ln);
 	$bal=$db['balance'];	 
 }
+if(isset($_GET['avail'])){
+	$yo=$_GET['amnt'];
+	$po=$_GET['timep'];
+	$usid=$_SESSION["user"];
+	$ro=$_GET['rat'];
+	$da=date("Y/m/d");
+	if($po==45){
+	$da1=date("Y/m/d",time() + ((45) * 24*60*60));
+	}
+	else{
+		$da1=date("Y/m/d",time() + ((365)*$po* 24*60*60));
+	}
 
+	if($yo>$bal){
+	echo "<script type='text/javascript'>alert('Your balance is less');</script>";
+	}
+	else if($po==45&&$yo<2000){
+		echo "<script type='text/javascript'>alert('Amount should be greater than 2000');</script>";
+
+	}
+	else if($po==2&&$yo<5000){
+		echo "<script type='text/javascript'>alert('Amount should be greater than 5000');</script>";		
+	}
+	
+	else if($po==5&&$yo<7000){
+		echo "<script type='text/javascript'>alert('Amount should be greater than 7000');</script>";
+	}
+	else if($po==10&&$yo<10000){
+		echo "<script type='text/javascript'>alert('Amount should be greater than 10000');</script>";
+	}
+	else if($po==20&&$yo<20000){
+		echo "<script type='text/javascript'>alert('Amount should be greater than 20000');</script>";
+	}
+	else{
+		$data=mysqli_connect("localhost","root","","bank") or die();
+		$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','')");
+	}
+	
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,19 +61,19 @@ if(isset($_SESSION["user"])){
 $(document).ready(function(){
 	$("#tm").click(function(){
 		if ($("#tm").val()=="45") {
-			$("#rat").text('5');
+			$("#rat").val('5');
 		}
 		if ($("#tm").val()=="2") {
-			$("#rat").text('5.75');
+			$("#rat").val('5.75');
 		}
 		if ($("#tm").val()=="5") {
-			$("#rat").text('6');
+			$("#rat").val('6');
 		}
 		if ($("#tm").val()=="10") {
-			$("#rat").text('7');
+			$("#rat").val('7.25');
 		}
 		if ($("#tm").val()=="20") {
-			$("#rat").text('9');
+			$("#rat").val('9');
 		}
         
         
@@ -47,7 +86,7 @@ $(document).ready(function(){
 </head>
 <body>
 	  <style type="text/css">
-	#rat {display:inline-block;}
+	#rat {display:inline-block;width:4%;}
 	#rt {display:inline-block;}
 	#tm {display:inline-block;}
 	#st {display:inline-block;}
@@ -55,13 +94,19 @@ $(document).ready(function(){
 	<h3>Hey <?php echo $name; ?></h3>
 	<h3>Your Balance = <?php echo $bal; ?></h3>
 	<div>
-		
-		<form action="fd.php">
+		Time Period----Min amount <br>
+		For 45 days --> 2000 Rupees<br>
+		For 2 year -->  5000 Rupees<br>
+		For 5 year -->  7000 Rupees<br>
+		For 10 year --> 10000 Rupees<br>
+		For 20 year --> 20000 Rupees<br>
+		<form action="fd.php" method="GET">
 			<h4>Enter amount to be deposited:
-  <input name="amnt" id="am" type="number">
+  <input name="amnt" id="am" type="number" value="<?php echo $yo; ?>">
   <br></h4>
 			<h4 id="st">Select Time period :- </h4>
   <select name="timep" id="tm">
+  	
     <option value="45">45 days</option>
     <option value="2">2 years</option>
     <option value="5">5 years</option>
@@ -70,10 +115,10 @@ $(document).ready(function(){
     
   </select><br>
 
-  <h4 id="rt">Rate :  </h4>  <h4 id="rat"></h4> %
+  <h4 id="rt">Rate :  </h4>  <input type="float" name="rat" id="rat" value="5" readonly>%
   
   <br>
-  <input type="submit"  value="check avaibility">
+  <input type="submit" name="avail" value="check avaibility">
 </form>
 	</div>
 
