@@ -21,8 +21,12 @@ if(isset($_GET['avail'])){
 	$da1=date("Y/m/d",time() + ((45) * 24*60*60));
 	$to=$yo+($yo*$ro*45/(100*365));
 	}
+	else if($po==20){
+		$da1=date('Y/m/d',strtotime('+19 years'));
+	$to=$yo+($yo*$ro*$po/(100));
+	}
 	else{
-		$da1=date("Y/m/d",time() + ((365)*$po* 24*60*60));
+		$da1=date("Y/m/d",time() + ((365)*$po*24*60*60));
 		$to=$yo+($yo*$ro*$po/(100));
 	}
 
