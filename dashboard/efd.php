@@ -17,7 +17,7 @@
 	{
 		$yo=$_GET['amnt'];
 		$po=$_GET['timep'];
-		$usid=$_SESSION["uid"];
+		$usid=$_SESSION["uid"];		
 		$ro=$_GET['rat'];
 		$da=date("Y/m/d");
 		if($po==45)
@@ -37,7 +37,7 @@
 		}
 		if($yo>$bal)
 		{
-		echo "<script type='text/javascript'>alert('Your balance is less');</script>";
+			echo "<script type='text/javascript'>alert('Your balance is less');</script>";
 		}
 		else if($po==45&&$yo<2000)
 		{
@@ -67,7 +67,7 @@
 			$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','$to')");
 			$bal=$bal-$yo;
 			$db=mysqli_query($data,"UPDATE login SET `balance`='$bal' WHERE `uid`='$usid'");
-			header("location:myfd.php");
+			header("location:efd.php");
 		}		
 	}
 ?>
@@ -192,7 +192,7 @@
 							For 20 year --> 20000 Rupees<br>
 						</div>
 						<div class="mdl-card__actions mdl-card--border">
-							<form action="fd.php" method="GET">
+							<form method="GET">
 								<div class = "mdl-textfield mdl-js-textfield mdl-textfield--expandable">								
 									<label class = "mdl-button mdl-js-button mdl-button--icon" for = "amnt">
 										<i class = "material-icons">add</i>
@@ -214,13 +214,14 @@
 									<option value="10">10 years</option>
 									<option value="20">20 years</option>							
 								</select><br>
+								Rate
 								<div class = "mdl-textfield mdl-js-textfield mdl-textfield--expandable">								
 									<label class = "mdl-button mdl-js-button mdl-button--icon" for = "rat">
 										<i class = "material-icons">info</i>
 									</label>
 									<div class = "mdl-textfield__expandable-holder">
 										<input class = "mdl-textfield__input" type = "text" 
-											pattern = "[0-9]+(\.[0-9]+)?" id = "rat">
+											pattern = "[0-9]+(\.[0-9]+)?" id = "rat" readonly>
 										<label class = "mdl-textfield__label" for = "rat">
 											Amount..</label>
 										<span class = "mdl-textfield__error">Number required!</span>
@@ -243,8 +244,8 @@
 				xhttp.onreadystatechange = function() {
 
 					if (this.readyState == 4 && this.status == 200) {
-
-						document.getElementById("shownot").innerHTML = this.responseText;	
+						if(this.responseText)
+							document.getElementById("shownot").innerHTML = this.responseText;	
 					}
 				};
 				xhttp.open("GET", "shownot.php", true);

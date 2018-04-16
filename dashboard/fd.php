@@ -55,7 +55,7 @@ if(isset($_GET['avail'])){
 		$db=mysqli_query($data,"INSERT INTO fd VALUES ('','$usid','$da','$da1','$ro','$yo','$to')");
 		$bal=$bal-$yo;
 		$db=mysqli_query($data,"UPDATE login SET `balance`='$bal' WHERE `uid`='$usid'");
-		header("location:myfd.php");
+		header("location:efd.php");
 	}
 	
 }
