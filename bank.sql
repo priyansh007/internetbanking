@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2018 at 08:35 AM
--- Server version: 10.1.22-MariaDB
--- PHP Version: 7.1.4
+-- Generation Time: Apr 16, 2018 at 06:14 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `bank`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fd`
+--
+
+CREATE TABLE `fd` (
+  `fid` int(121) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `opendate` date NOT NULL,
+  `closedate` date NOT NULL,
+  `interest` double NOT NULL,
+  `startmoney` double NOT NULL,
+  `endmoney` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fd`
+--
+
+INSERT INTO `fd` (`fid`, `uid`, `opendate`, `closedate`, `interest`, `startmoney`, `endmoney`) VALUES
+(1, 0, '2018-04-03', '2018-04-04', 0, 0, 0),
+(13, 3, '2018-04-15', '2018-05-30', 5, 3000, 3018.4931506849),
+(19, 3, '2018-04-15', '2020-04-14', 5.75, 6000, 6690),
+(22, 3, '2018-04-15', '2018-05-30', 5, 2500, 2515.4109589041);
 
 -- --------------------------------------------------------
 
@@ -72,10 +98,10 @@ INSERT INTO `trans` (`id`, `userid1`, `des`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transcation`
+-- Table structure for table `transaction`
 --
 
-CREATE TABLE `transcation` (
+CREATE TABLE `transaction` (
   `tid` int(11) NOT NULL,
   `sender` int(11) NOT NULL,
   `receiver` int(11) NOT NULL,
@@ -86,6 +112,12 @@ CREATE TABLE `transcation` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `fd`
+--
+ALTER TABLE `fd`
+  ADD PRIMARY KEY (`fid`);
 
 --
 -- Indexes for table `login`
@@ -101,9 +133,9 @@ ALTER TABLE `trans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `transcation`
+-- Indexes for table `transaction`
 --
-ALTER TABLE `transcation`
+ALTER TABLE `transaction`
   ADD PRIMARY KEY (`tid`);
 
 --
@@ -111,20 +143,29 @@ ALTER TABLE `transcation`
 --
 
 --
+-- AUTO_INCREMENT for table `fd`
+--
+ALTER TABLE `fd`
+  MODIFY `fid` int(121) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
--- AUTO_INCREMENT for table `transcation`
+-- AUTO_INCREMENT for table `transaction`
 --
-ALTER TABLE `transcation`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+ALTER TABLE `transaction`
+  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
