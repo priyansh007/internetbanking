@@ -144,7 +144,8 @@
 				</header>
 				<nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
 					<a class="mdl-navigation__link" href="../dashboard/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-					<a class='mdl-navigation__link' href='../dashboard/fd.php'><i class='mdl-color-text--blue-grey-400 material-icons' role='presentation'>shopping_basket</i>e-Fixed Deposit</a>		  
+					<a class='mdl-navigation__link' href='../dashboard/efd.php'><i class='mdl-color-text--blue-grey-400 material-icons' role='presentation'>shopping_basket</i>e-Fixed Deposit</a>		  
+					<a class='mdl-navigation__link' href='../dashboard/ifsc.php'><i class='mdl-color-text--blue-grey-400 material-icons' role='presentation'>shopping_basket</i>IFSC Search</a>
 					<div class="mdl-layout-spacer"></div>
 					<a class="mdl-navigation__link" href="../contact-us/"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Contact Us</a>
 				</nav>
@@ -221,7 +222,7 @@
 									</label>
 									<div class = "mdl-textfield__expandable-holder">
 										<input class = "mdl-textfield__input" type = "text" 
-											pattern = "[0-9]+(\.[0-9]+)?" id = "rat" readonly>
+											pattern = "[0-9]+(\.[0-9]+)?" id = "rat">
 										<label class = "mdl-textfield__label" for = "rat">
 											Amount..</label>
 										<span class = "mdl-textfield__error">Number required!</span>
