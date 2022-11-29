@@ -1,4 +1,4 @@
-#D3 Simple - Population vs GDP per capita
+# D3 Simple - Population vs GDP per capita
 The purpose of this homework is to teach you some basic grammar and functionalities contained in D3.js:
 
 * Loading two datasets
