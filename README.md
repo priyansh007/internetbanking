@@ -56,34 +56,19 @@ Next, create the x- and two y-axes for your chart. The x-axis will show country 
 ### Step 4:
 Next, create the x- and two y-axes for your chart. The x-axis will show country name, so we will use a `d3.scaleBand` for it. The first y-axis will show population of country, so we will use `d3.scaleRadial`. Second y-axis will show gdp per capita, it will also use `d3.scaleRadial`. Use innerCircle radius = 100 and outerCircle radius = 400. Use color of your choice for both plots.
  
- The first y-axis range will be 0 to maximum value of population, and the second y-axis range will be 0 to the maximum gdp per capita.
+ The first y-axis range will be 0 to maximum value of population, and the second y-axis range will be 0 to the maximum gdp per capita. 
 
 > 🔍 **Hint:** You'll need to use D3 `range` and `domain` to do this.
 
 
 ### Step 5:
-We want to visualize the relationship of male and female employement rates in selected country from 1991 to 2022, in order to observe how this relationship has changed over the time period of our dataset. For this we will create a [lollipop chart](https://datavizproject.com/data-type/lollipop-chart/). A lollipop chart is similar to a bar chart, but instead of using rectangles to show data values, it shows lines with circles at the top.
-
-For each year in dataset, you should show two different colored lines, one for male and another for female. You can pick the colors you want to use, but they should be easily distinguishable. Append a circle at the top of each line for both male and female to create lollipop visualization.
-
-> 🔍 **Hint:** Since your x-scale uses Javascript `Date` objects, you should convert your year values to Date objects to correctly call your x scale. You can do this operation here, or when you do your data wrangling in Step 3 (instead of converting to numerics, convert to `Date` objects).
-
-> 🔍 **Hint:** You don't want the two lollipops for a year to overlap, so give them each a small amount of offset. In the image above, the male lollipop for each year is offset left 5 pixels, and the female lollipop is offset right 5 pixels.
-
-> 🔍 **Hint:** Give a bit of margin around the outside of your chart so your objects don't run off the edge of the `svg`.
+It’s important to help your audience understand what is going on in the chart. To do this, add a legend at the upper left corner of the chart. The legend should have a square showing the colors, with labels reading "GDP per capita" and "Population". 
 
 
-### Step 6:
-It’s important to help your audience understand what is going on in the chart. To do this, add a legend at the upper right corner of the chart. The legend should have a square showing the colors, with labels reading "Female Employment Rate" and "Male Employment Rate". Then add titles for your x-axis and y-axis: "Year" for the x-axis and a rotated "Employment Rate" for the y-axis.
-
-### Step 7:
-As a final step, make the chart interactive. When the user updates the country value in the drop down, the chart should be redrawn to show the values for the newly selected country.
-
-Once you are finished with Step 7 and you have your chart looking similar to the screenshot above, you are done! Be sure to commit and push your completed code by the deadline.
 
 ### Extra Credit:
 
-Instead of simply redrawing the chart in Step 7 when a user selects a different country, use D3 transitions to animate each lollipop from the old to new values (that is, either growing or shrinking). This step is worth +2 extra credit points.
+Instead of simply static chart, use D3 interaction to increase the size of the bar when hovered by mobile pointer. This step is worth +2 extra credit points.
 
 ---
 
